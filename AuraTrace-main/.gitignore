@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.env
+.env.local
+*.log
+*.err
+.DS_Store
+web/dist/
+server/dist/
+server/.emails/
+coverage/
+.vite/
+*.tsbuildinfo

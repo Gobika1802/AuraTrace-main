@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-200: #c7d2fe;
+  --color-brand-300: #a5b4fc;
+  --color-brand-400: #818cf8;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+  --color-brand-800: #3730a3;
+  --color-brand-900: #312e81;
+  --color-brand-950: #1e1b4b;
+  --shadow-card: 0 1px 2px 0 rgb(15 23 42 / 0.04);
+}
+
+:root {
+  --chart-grid: #e2e8f0;
+  --chart-line: #4f46e5;
+  --chart-line-soft: #a5b4fc;
+}
+
+.dark {
+  --chart-grid: #1e293b;
+  --chart-line: #818cf8;
+  --chart-line-soft: #4f46e5;
+}
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 dark:bg-[#0a0f1c] dark:text-slate-100;
+    font-family: var(--font-sans);
+  }
+
+  * {
+    border-color: theme(colors.slate.200);
+  }
+
+  .dark * {
+    border-color: rgb(30 41 59 / 0.9);
+  }
+
+  ::selection {
+    @apply bg-brand-100 text-brand-900 dark:bg-brand-900 dark:text-brand-100;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-500/60 ring-offset-2 ring-offset-white dark:ring-offset-slate-950;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+}
+
+@keyframes auratrace-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: auratrace-fade-in 0.18s ease-out;
+}
+
+@keyframes auratrace-pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgb(34 197 94 / 0.35);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgb(34 197 94 / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgb(34 197 94 / 0);
+  }
+}
+
+.status-pulse {
+  animation: auratrace-pulse-ring 2s ease-out infinite;
+}
+
+@keyframes auratrace-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton {
+  @apply relative overflow-hidden bg-slate-100 dark:bg-slate-800/70;
+}
+
+.skeleton::after {
+  content: "";
+  @apply absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent dark:via-white/10;
+  animation: auratrace-shimmer 1.6s infinite;
+}
